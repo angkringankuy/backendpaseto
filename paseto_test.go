@@ -1,4 +1,4 @@
-package backendyak
+package backendpaseto
 
 import (
 	"fmt"
@@ -14,12 +14,12 @@ func TestGenerateKeyPASETO(t *testing.T) {
 	privateKey, publicKey := watoken.GenerateKey()
 	fmt.Println(privateKey)
 	fmt.Println(publicKey)
-	hasil, err := watoken.Encode("asoy", privateKey)
+	hasil, err := watoken.Encode("geboyy", privateKey)
 	fmt.Println(hasil, err)
 }
 
 func TestHashPass(t *testing.T) {
-	password := "cihuypass"
+	password := "kepoo"
 
 	Hashedpass, err := HashPass(password)
 	fmt.Println("error : ", err)
@@ -27,10 +27,10 @@ func TestHashPass(t *testing.T) {
 }
 
 func TestHashFunc(t *testing.T) {
-	conn := MongoCreateConnection("MONGOSTRING", "HRMApp")
+	conn := MongoCreateConnection("MONGOSTRING", "proyek3")
 	userdata := new(User)
-	userdata.Username = "cihuy"
-	userdata.Password = "cihuypass"
+	userdata.Username = "syahid"
+	userdata.Password = "kepo"
 
 	data := GetOneUser(conn, "user", User{
 		Username: userdata.Username,
@@ -45,11 +45,11 @@ func TestHashFunc(t *testing.T) {
 }
 
 func TestTokenEncoder(t *testing.T) {
-	conn := MongoCreateConnection("MONGOSTR", "HRMApp")
+	conn := MongoCreateConnection("MONGO", "proyek3")
 	privateKey, publicKey := watoken.GenerateKey()
 	userdata := new(User)
-	userdata.Username = "cihuy"
-	userdata.Password = "cihuypass"
+	userdata.Username = "syahid"
+	userdata.Password = "kepo"
 
 	data := GetOneUser(conn, "user", User{
 		Username: userdata.Username,
@@ -65,10 +65,10 @@ func TestTokenEncoder(t *testing.T) {
 }
 
 func TestInsertUserdata(t *testing.T) {
-	conn := MongoCreateConnection("MONGOSTRING", "HRMApp")
-	password, err := HashPass("rofiganteng")
+	conn := MongoCreateConnection("MONGOSTRING", "proyek3")
+	password, err := HashPass("syahid25")
 	fmt.Println("err", err)
-	data := InsertUserdata(conn, "rofi", "role", password)
+	data := InsertUserdata(conn, "syahid", "role", password)
 	fmt.Println(data)
 }
 
@@ -79,7 +79,7 @@ func TestDecodeToken(t *testing.T) {
 }
 
 func TestCompareUsername(t *testing.T) {
-	conn := MongoCreateConnection("MONGOSTRING", "HRMApp")
+	conn := MongoCreateConnection("MONGOSTRING", "proyek3")
 	deco := watoken.DecodeGetId("public",
 		"token")
 	compare := CompareUsername(conn, "user", deco)
@@ -89,7 +89,7 @@ func TestCompareUsername(t *testing.T) {
 func TestEncodeWithRole(t *testing.T) {
 	privateKey, publicKey := watoken.GenerateKey()
 	role := "admin"
-	username := "cihuy"
+	username := "syahid"
 	encoder, err := EncodeWithRole(role, username, privateKey)
 
 	fmt.Println(" error :", err)

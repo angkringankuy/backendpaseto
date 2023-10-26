@@ -1,4 +1,4 @@
-package backendyak
+package backendpaseto
 
 import (
 	"github.com/whatsauth/watoken"
@@ -22,7 +22,7 @@ func TokenEncoder(username, privatekey string) string {
 		resp.Message = "Gagal Encode" + err.Error()
 	} else {
 		resp.Token = encode
-		resp.Message = "Welcome cihuyyy"
+		resp.Message = "Welcome ahayyy"
 	}
 
 	return ReturnStringStruct(resp)

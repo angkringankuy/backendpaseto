@@ -1,7 +1,7 @@
-package backendyak
+package backendpaseto
 
 import (
-	json2 "encoding/json"
+	jsoncuy "encoding/json"
 	"github.com/whatsauth/watoken"
 	"net/http"
 	"os"
@@ -11,7 +11,7 @@ func GetDataUserFromGCF(PublicKey, MongoEnv, dbname, colname string, r *http.Req
 	req := new(ResponseDataUser)
 	conn := MongoCreateConnection(MongoEnv, dbname)
 	cihuy := new(Response)
-	err := json2.NewDecoder(r.Body).Decode(&cihuy)
+	err := jsoncuy.NewDecoder(r.Body).Decode(&cihuy)
 	if err != nil {
 		req.Status = false
 		req.Message = "error parsing application/json: " + err.Error()
@@ -32,7 +32,7 @@ func GetDataUserFromGCF(PublicKey, MongoEnv, dbname, colname string, r *http.Req
 }
 
 func ReturnStringStruct(Data any) string {
-	json, _ := json2.Marshal(Data)
+	json, _ := jsoncuy.Marshal(Data)
 	return string(json)
 }
 
@@ -41,7 +41,7 @@ func GCFPasetoTokenStr(PrivateKey, MongoEnv, dbname, collectionname string, r *h
 	resp.Status = false
 	mconn := MongoCreateConnection(MongoEnv, dbname)
 	var datauser User
-	err := json2.NewDecoder(r.Body).Decode(&datauser)
+	err := jsoncuy.NewDecoder(r.Body).Decode(&datauser)
 	if err != nil {
 		resp.Message = "error parsing application/json: " + err.Error()
 	} else {
@@ -66,7 +66,7 @@ func GCFPasswordHasher(r *http.Request) string {
 	resp := new(Credential)
 	userdata := new(User)
 	resp.Status = false
-	err := json2.NewDecoder(r.Body).Decode(&userdata)
+	err := jsoncuy.NewDecoder(r.Body).Decode(&userdata)
 	if err != nil {
 		resp.Message = "error parsing application/json: " + err.Error()
 	} else {
@@ -87,7 +87,7 @@ func InsertDataUserGCF(Mongoenv, dbname string, r *http.Request) string {
 	userdata := new(User)
 	resp.Status = false
 	conn := MongoCreateConnection(Mongoenv, dbname)
-	err := json2.NewDecoder(r.Body).Decode(&userdata)
+	err := jsoncuy.NewDecoder(r.Body).Decode(&userdata)
 	if err != nil {
 		resp.Message = "error parsing application/json: " + err.Error()
 	} else {
